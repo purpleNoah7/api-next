@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
-export const revalidate = 60;
+export const revalidate = 5;
 export default function Home(): ReactElement {
   const [tasks, setTasks] = useState([]);
   const router = useRouter();
@@ -23,8 +23,8 @@ export default function Home(): ReactElement {
   }, []); // Empty dependency array to ensure useEffect runs only once on component mount
 
   return (
-    <main className=" min-h-screen flex-col items-center justify-between p-24 w-full">
-      <div className="bg-slate-700   p-5 rounded-md w-full flex items center justify-between font-black text-3xl">
+    <main className=" bg-slate-950 min-h-screen flex-col items-center justify-between p-24 w-full">
+      <div className=" bg-slate-700  p-5 rounded-md w-full flex items center justify-between font-black text-3xl">
         <h1 className="w-full flex items-center justify-center">Tareas</h1>
         <Link
           className=" bg-sky-600 p-3 hover:bg-sky-700 transition text-xl rounded-md"
