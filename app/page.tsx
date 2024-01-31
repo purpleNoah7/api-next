@@ -2,10 +2,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
-
+export const revalidate = 60;
 export default function Home(): ReactElement {
   const [tasks, setTasks] = useState([]);
   const router = useRouter();
+
   useEffect(() => {
     const getData = async () => {
       try {
