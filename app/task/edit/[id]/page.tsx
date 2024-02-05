@@ -10,7 +10,9 @@ export default function EditTask({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   useEffect(() => {
-    fetch(`/api/task/${params.id}`)
+    fetch(`/api/task/${params.id}`, {
+      next: { revalidate: 10 },
+    })
       .then((res) => res.json())
       .then((data) => {
         setTitle(data.title);

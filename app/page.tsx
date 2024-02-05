@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ReactElement, useEffect, useState } from "react";
-export const revalidate = 5;
+import { ReactElement, use, useEffect, useState } from "react";
+
 export default function Home(): ReactElement {
   const [tasks, setTasks] = useState([]);
   const router = useRouter();
@@ -10,7 +10,9 @@ export default function Home(): ReactElement {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch("/api/task");
+        const res = await fetch("/api/task", {
+          next: { revalidate: 10 },
+        });
         const data = await res.json();
 
         setTasks(data);
@@ -20,7 +22,7 @@ export default function Home(): ReactElement {
     };
 
     getData();
-  }, []); // Empty dependency array to ensure useEffect runs only once on component mount
+  }, []);
 
   return (
     <main className=" bg-slate-950 min-h-screen flex-col items-center justify-between p-24 w-full">

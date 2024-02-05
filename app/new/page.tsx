@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { ReactElement, useState } from "react";
 
@@ -9,6 +10,7 @@ export default function NewTask(): ReactElement {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetch("/api/task", {
+      next: { revalidate: 10 },
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,9 +18,9 @@ export default function NewTask(): ReactElement {
       body: JSON.stringify({ title, description }),
     });
     const data = await res.json();
-    console.log(data);
     router.push("/");
   };
+  
   return (
     <div className="flex items-center justify-center  min-h-screen w-full bg-slate-950">
       <form
